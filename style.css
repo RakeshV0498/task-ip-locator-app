@@ -1,0 +1,347 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Styles */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #74ebd5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #acb6e5, #74ebd5);
+  background: linear-gradient(to left, #acb6e5, #74ebd5);
+}
+
+/* Navbar */
+.nav-bar {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img-logo {
+  width: 5rem;
+}
+
+.app-name {
+  font-weight: 700;
+  color: #01143f;
+  font-size: 6rem;
+}
+
+/* Form Styles */
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.input-form {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0.5rem;
+  border-radius: 9px;
+}
+
+.input-ip {
+  padding: 1rem;
+  flex-grow: 1;
+  font-size: 4rem;
+  font-weight: 700;
+  border: 3px solid #ccc;
+  border-radius: 9px;
+}
+
+.btn {
+  flex-grow: 1;
+  font-weight: 700;
+  font-size: 2.4rem;
+  padding: 1rem 1rem 0.1rem 3rem;
+  border: none;
+  border-radius: 9px;
+  background-color: #4db8ff;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #2dabff;
+}
+
+.btn-search {
+  position: relative;
+}
+
+.btn-search::before {
+  background-image: url(img/search-2911.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  content: "";
+  height: 20px;
+  left: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+}
+
+.img-icon {
+  width: 4rem;
+}
+
+/* Display IP Styles */
+.display-ip {
+  display: grid;
+  height: 70vh;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.display-data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6rem;
+  gap: 2rem;
+  font-size: 2.4rem;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem 2rem 2rem;
+}
+
+#map {
+  flex-shrink: 0;
+  height: 460px;
+  border: 1px solid #f1f2f3;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 9px;
+  box-shadow: 0.5rem 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+  .nav-bar {
+    padding: 1rem;
+  }
+  .app-name {
+    font-size: 2rem;
+  }
+  .form-container {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .input-form {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .input-ip {
+    height: 5rem;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+  }
+  .btn {
+    width: -moz-fit-content;
+    width: fit-content;
+    align-self: center;
+    border-radius: 9px;
+  }
+  .display-ip {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 2rem;
+  }
+  .display-data {
+    font-size: 1.8rem;
+    padding: 3rem;
+  }
+  .map-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  body {
+    background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
+    background: linear-gradient(to right, #acb6e5, #74ebd5);
+  }
+  .nav-bar {
+    padding: 1rem;
+  }
+  .app-name {
+    font-size: 2rem;
+  }
+  .form-container {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .input-ip {
+    height: 5rem;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+  }
+  .btn {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 9px;
+  }
+  .display-ip {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 2rem;
+  }
+  .display-data {
+    font-size: 1.8rem;
+    padding: 3rem;
+    align-items: center;
+  }
+  .map-container {
+    margin: 1.5rem;
+    margin-top: 0;
+    padding: 1.5rem;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .nav-bar {
+    padding: 2rem;
+  }
+  .app-name {
+    font-size: 3rem;
+  }
+  .form-container {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .input-ip {
+    height: 5rem;
+    font-size: 2rem;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+  }
+  .btn {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 9px;
+  }
+  .display-ip {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 2rem;
+  }
+  .display-data {
+    font-size: 2rem;
+    padding: 3rem;
+    align-items: center;
+  }
+  .map-container {
+    margin: 2rem;
+    margin-top: 0;
+    padding: 1.5rem;
+    width: 100%;
+    align-self: center;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+  .img-logo {
+    width: 6rem;
+  }
+  .app-name {
+    font-size: 4rem;
+  }
+  .form-container {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .input-ip {
+    height: 5rem;
+    font-size: 3.6rem;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+  }
+  .btn {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 9px;
+  }
+  .display-ip {
+    max-width: 100%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .display-data {
+    font-size: 2.4rem;
+    padding: 3rem;
+  }
+  .map-container {
+    margin-top: 0;
+    padding: 3rem;
+  }
+  #map {
+    height: 420px;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .img-logo {
+    width: 7rem;
+  }
+  .app-name {
+    font-size: 4.8rem;
+  }
+  .form-container {
+    width: 100%;
+    margin-top: 1.6rem;
+  }
+  .input-ip {
+    height: 6rem;
+    font-size: 3.6rem;
+    border: 2px solid #ccc;
+    border-radius: 9px;
+  }
+  .btn {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 9px;
+  }
+  .display-ip {
+    max-width: 100%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .display-data {
+    font-size: 2.8rem;
+    padding: 3rem;
+  }
+  .map-container {
+    margin-top: 0;
+    padding: 3rem;
+  }
+  #map {
+    height: 480px;
+  }
+}
