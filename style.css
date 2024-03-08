@@ -124,11 +124,11 @@ body {
   padding: 2rem 3rem 2rem 2rem;
 }
 
-#map {
+#map img {
   flex-shrink: 0;
   height: 460px;
   border: 1px solid #f1f2f3;
-  width: 100%;
+  max-width: 100%;
   background-size: cover;
   background-position: center;
   border-radius: 9px;
