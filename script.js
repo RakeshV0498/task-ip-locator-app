@@ -78,13 +78,10 @@ function displayIpDetails(data) {
     </article>
   `;
 
-  displayMap(data.latitude, data.longitude, data.city);
+  displayMap(data.latitude, data.longitude);
 }
 
-function displayMap(lat, lon, city) {
+function displayMap(lat, lon) {
   const mapContainer = document.getElementById("map");
-  mapContainer.insertAdjacentHTML(
-    "beforeend",
-    `<img src='https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=11&size=1920x1080&maptype=roadmap&markers=color:red%7Clabel:%7C${lat},${lon}&key=${apiKey}' alt='${city} location Map'>`
-  );
+  mapContainer.style.backgroundImage = `url('https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=10&size=1920x1080&maptype=roadmap&markers=color:red%7Clabel:%7C${lat},${lon}&key=${apiKey}')`;
 }
