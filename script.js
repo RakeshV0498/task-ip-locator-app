@@ -1,32 +1,46 @@
 "use strict";
-
-const api = "http://ip-api.com/json/";
+const api = "https://ipapi.co/";
 const apiKey = "AIzaSyBfZSS0pdjxYqjTf_cH9mYk3IC9APIzxxk";
 
 const btnHome = document.querySelector(".img-logo");
 const btnSearch = document.querySelector(".btn-search");
 const appContainer = document.querySelector(".main-app");
 
+const inputEle = document.querySelector(".input-ip");
+
 document.addEventListener("DOMContentLoaded", function () {
-  const ipAddress = document.querySelector(".input-ip").value;
-  getIpDetails(ipAddress);
+  getIpDetails("");
 });
 
 btnSearch.addEventListener("click", (e) => {
   e.preventDefault();
-  const ipAddress = document.querySelector(".input-ip").value;
-  getIpDetails(ipAddress);
+  let ipAddress = inputEle.value;
+  ipAddress.includes(".com")
+    ? getDnsLookup(ipAddress)
+    : getIpDetails(ipAddress);
 });
 
 btnHome.addEventListener("click", () => location.reload());
 
+async function getDnsLookup(hostname) {
+  const apiUrl = `https://networkcalc.com/api/dns/lookup/${hostname}`;
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    getIpDetails(data.records.A[0].address);
+  } catch (error) {
+    console.error("Error fetching DNS lookup:", error);
+    throw error;
+  }
+}
+
 async function getIpDetails(ipAddress) {
   try {
-    const response = await fetch(
-      `${api}${ipAddress}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,zip,lat,lon,timezone,currency,isp,org,as,query`
-    );
+    const response = await fetch(`${api}${ipAddress}/json/`);
     const data = await response.json();
-    console.log(data);
     displayIpDetails(data);
   } catch (error) {
     console.error("Error fetching IP details:", error);
@@ -42,22 +56,21 @@ function displayIpDetails(data) {
   appContainer.innerHTML = `
     <article class="display-ip">
       <section class="display-data">
-        <p class="ip-add"><strong>IP Address: </strong>${data.query}</p>
-        <p class="continent"><strong>Continent: </strong>${
-          data.continent
-        } (<span class="code">${data.continentCode}</span>)</p>
-        <p class="country"><strong>Country: </strong>${
-          data.country
-        } (<span class="code">${data.countryCode}</span>)</p>
-        <p class="state"><strong>State: </strong>${
-          data.regionName
-        } (<span class="code">${data.region}</span>)</p>
-        <p class="city"><strong>City: </strong>${data.city}</p>
-        <p class="zip"><strong>Pin Code: </strong>${data.zip || "N/A"}</p>
-        <p class="coordinates"><strong>Coordinates: </strong>${data.lat},${
-    data.lon
+        <p class="ip-add"><strong>IP Address: </strong>${data.version} - ${
+    data.ip
   }</p>
-        <p class="isp-name"><strong>ISP Name: </strong>${data.isp}</p>
+        <p class="country"><strong>Country: </strong>${
+          data.country_name
+        } (<span class="code">${data.country_code}</span>)</p>
+        <p class="state"><strong>State: </strong>${
+          data.region
+        } (<span class="code">${data.region_code}</span>)</p>
+        <p class="city"><strong>City: </strong>${data.city}</p>
+        <p class="zip"><strong>Pin Code: </strong>${data.postal || "N/A"}</p>
+        <p class="coordinates"><strong>Coordinates: </strong>${data.latitude},${
+    data.longitude
+  }</p>
+        <p class="isp-name"><strong>ISP Name: </strong>${data.org}</p>
         <p class="date-now"><strong>Date: </strong>${dateTimeString}</p>
       </section>
       <section class='map-container'>
@@ -65,7 +78,7 @@ function displayIpDetails(data) {
     </article>
   `;
 
-  displayMap(data.lat, data.lon);
+  displayMap(data.latitude, data.longitude);
 }
 
 function displayMap(lat, lon) {
